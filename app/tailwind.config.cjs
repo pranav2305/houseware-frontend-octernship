@@ -21,7 +21,10 @@ module.exports = {
           "secondary": "#4EE2C1",
           "tertiary": "#FF5537",
         },
-      }
+      },
+      fontFamily: {
+        sans: ["Montserrat", "sans-serif"],
+      },
     },
   },
   plugins: [],
