@@ -1,16 +1,14 @@
-import React from "react";
-import { ThemeType, Props } from "../ts/types/theme";
-import { ThemeContextType } from "../ts/interfaces/theme";
+import { useState, createContext } from "react";
 
 const initialContext: ThemeContextType = {
   theme: "light",
   setTheme: () => {},
 };
 
-export const ThemeContext = React.createContext<ThemeContextType>(initialContext);
+export const ThemeContext = createContext<ThemeContextType>(initialContext);
 
-export default ({ children }: Props) => {
-  const [theme, setTheme] = React.useState<ThemeType>("light");
+export default ({ children }: ContextProviderProps) => {
+  const [theme, setTheme] = useState<ThemeType>("light");
 
   const defaultContext = {
     theme,

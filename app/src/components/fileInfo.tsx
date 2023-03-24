@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fileInfoProp } from "../ts/interfaces/file";
 
 export default function FileInfo({ icon, text, style, iconDivStyle, textStyle }: fileInfoProp) {
     return (
