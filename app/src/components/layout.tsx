@@ -11,9 +11,13 @@ const Layout = () => {
     <div
       className={`${
         theme === "light" ? "bg-light-background" : "bg-dark-background"
-      } min-h-screen`}
+      } min-h-screen pb-10`}
     >
-      <nav className={theme === "light" ? "bg-light-primary": "bg-dark-primary"}>
+      <nav
+        className={`${
+          theme === "light" ? "bg-light-primary" : "bg-dark-primary"
+        } fixed w-full`}
+      >
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-24 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -56,13 +60,11 @@ const Layout = () => {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <div className="flex flex-row gap-x-5">
-                  <img
-                    className="h-24 w-auto"
-                    src={logo}
-                    alt="HousewareHQ"
-                  />
-                  <h1 className="text-5xl text-white flex items-center">HousewareHQ</h1>
+                <div className="flex flex-row">
+                  <img className="h-24 w-auto" src={logo} alt="HousewareHQ" />
+                  <h1 className="text-3xl md:text-5xl text-white flex items-center">
+                    HousewareHQ
+                  </h1>
                 </div>
               </div>
             </div>
@@ -89,7 +91,9 @@ const Layout = () => {
           </div>
         </div>
       </nav>
-      <Outlet />
+      <div className="w-11/12 max-w-[1400px] m-auto pt-32">
+        <Outlet />
+      </div>
     </div>
   );
 };

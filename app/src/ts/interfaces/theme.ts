@@ -1,6 +1,6 @@
-import { ThemeType } from '../types/theme';
+import { ThemeType } from "../types/theme";
 
 export interface ThemeContextType {
-    theme: ThemeType;
-    setTheme: (theme: ThemeType) => void;
+  theme: ThemeType;
+  setTheme: (theme: ThemeType) => void;
 }

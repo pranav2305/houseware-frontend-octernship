@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import ThemeContextProvider from "./contexts/ThemeContext";
 
 const App = () => {
-
   return (
     <>
       <ThemeContextProvider>
