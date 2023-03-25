@@ -3,6 +3,7 @@ import { containsDuplicates } from "../utils";
 import { CASE_SENSITIVE } from "../config";
 
 const initialState: TextState = {
+  oldText: null,
   text: null,
   hasDuplicates: false,
   status: null,
@@ -19,6 +20,7 @@ const reducer = (
         if (action.text && action.text.length > 0) {
           return {
             ...state,
+            oldText: action.text,
             text: action.text,
             hasDuplicates: containsDuplicates(action.text),
             status: 200,
@@ -27,6 +29,7 @@ const reducer = (
         } else {
           return {
             ...state,
+            oldText: null,
             text: null,
             hasDuplicates: false,
             status: 400,
@@ -37,6 +40,7 @@ const reducer = (
         let err = error as Error;
         return {
           ...state,
+          oldText: null,
           text: null,
           hasDuplicates: false,
           status: 500,

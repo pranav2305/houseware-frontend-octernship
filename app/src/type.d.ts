@@ -50,6 +50,7 @@ interface characCardProp {
 }
 
 interface TextState {
+  oldText: string | null;
   text: string | null;
   hasDuplicates: boolean;
   status: 200 | 400 | 500 | null;
