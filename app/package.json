@@ -1,8 +1,9 @@
 {
-  "name": "app",
+  "name": "housewarehq-dcr",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://pranav2305.github.io/houseware-frontend-octernship",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
