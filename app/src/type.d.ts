@@ -42,6 +42,13 @@ interface dropZoneProp {
   setFiles: (files: File[]) => void;
 }
 
+interface characCardProp {
+  charac: string;
+  index: number;
+  indexes: number[];
+  setIndexes: (indexes: number[]) => void;
+}
+
 interface TextState {
   text: string | null;
   hasDuplicates: boolean;
@@ -52,8 +59,7 @@ interface TextState {
 interface TextAction  {
   type: string;
   text: string | null;
-  charac: string | null;
-  index: number | null;
+  indexes: number[] | null;
 };
 
 type DispatchType = (args: TextAction) => TextAction;

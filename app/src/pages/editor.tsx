@@ -10,6 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditorTab from "../components/editorTab";
 import PreviewTab from "../components/previewTab";
+import { reset } from "../store/actionCreators";
 
 const Editor = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,6 @@ const Editor = () => {
     }
   }, [textState]);
 
-  const onBack = () => {};
-
   return (
     <>
       <button
@@ -34,7 +33,7 @@ const Editor = () => {
         className={`${
           theme === "light" ? "bg-light-primary" : "bg-dark-primary"
         } p-3 pl-5 pr-5 h-12 mt-8 rounded-lg text-white text-xl font-bold flex flex-row gap-x-3 items-center`}
-        onClick={onBack}
+        onClick={() => dispatch(reset())}
       >
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
         Back to home

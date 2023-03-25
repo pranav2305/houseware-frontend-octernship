@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import { containsDuplicates } from "../utils";
+import { CASE_SENSITIVE } from "../config";
 
 const initialState: TextState = {
   text: null,
@@ -44,12 +45,21 @@ const reducer = (
       }
     case actionTypes.REMOVE_DUPLICATES:
       try {
-        if (action.charac && action.index) {
-          let text = state.text;
+        if (action.indexes && action.indexes.length > 0) {
+          const text = state.text ?? "";
+          const characsToRemove = action.indexes.map((index) =>
+            CASE_SENSITIVE ? text[index] : text[index].toLowerCase()
+          );
           if (text) {
             let newText = text
               .split("")
-              .filter((char, i) => char !== action.charac || i === action.index)
+              .filter(
+                (char, i) =>
+                  action.indexes?.includes(i) ||
+                  (CASE_SENSITIVE
+                    ? !characsToRemove.includes(char)
+                    : !characsToRemove.includes(char.toLowerCase()))
+              )
               .join("");
             return {
               ...state,
@@ -80,6 +90,8 @@ const reducer = (
           error: err.message,
         };
       }
+    case actionTypes.RESET:
+      return initialState;
   }
   return state;
 };

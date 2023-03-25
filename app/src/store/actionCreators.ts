@@ -4,20 +4,28 @@ export const submitText = (text: string) => {
     const action: TextAction = {
         type: actionTypes.SUBMIT_TEXT,
         text: text,
-        charac: null,
-        index: null
+        indexes: null
     };
 
     return action;
 };
 
-export const removeDuplicates = (charac: string, index: number) => {
+export const removeDuplicates = (indexes: number[]) => {
     const action: TextAction = {
         type: actionTypes.REMOVE_DUPLICATES,
         text: null,
-        charac: charac,
-        index: index
+        indexes: indexes
     };
 
     return action;
 };
+
+export const reset = () => {
+    const action: TextAction = {
+        type: actionTypes.RESET,
+        text: null,
+        indexes: null
+    };
+
+    return action;
+}
