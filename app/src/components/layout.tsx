@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { SnackbarContext } from "../contexts/SnackbarContext";
-import { useContext, forwardRef } from "react";
+import { useContext } from "react";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Navbar from "./navbar";

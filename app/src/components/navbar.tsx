@@ -4,13 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLanguage } from "@fortawesome/free-solid-svg-icons";
 import { LangContext } from "../contexts/LanguageContext";
 import { SUPPORTED_LANGS } from "../config";
+import { useLocation } from "react-router-dom";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
+  const location = useLocation();
   const { theme } = useContext(ThemeContext);
   const { lang, setLang } = useContext(LangContext);
+
   return (
     <nav
       className={`${
@@ -69,12 +72,12 @@ const Navbar = () => {
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button type="button" className="text-white hover:text-gray-300">
-              <Dropdown
+              {location.pathname === "/" && <Dropdown
                 options={SUPPORTED_LANGS}
                 onChange={(opt) => setLang(opt.value)}
                 value={lang}
                 placeholder="Select an option"
-              />
+              />}
               {/* <FontAwesomeIcon icon={faLanguage} /> */}
             </button>
             {/* <button
