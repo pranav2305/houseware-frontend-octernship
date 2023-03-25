@@ -1,18 +1,23 @@
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faCircleXmark,
+  faSun,
+  faMoon,
+} from "@fortawesome/free-solid-svg-icons";
 import { LangContext } from "../contexts/LanguageContext";
 import { SUPPORTED_LANGS } from "../config";
 import { useLocation } from "react-router-dom";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import logo from "../assets/logo.png";
-import { Drawer } from "@mui/material";
+import { Drawer, Switch } from "@mui/material";
 
 const Navbar = () => {
   const location = useLocation();
-  const { theme } = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
   const { lang, setLang } = useContext(LangContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -50,12 +55,32 @@ const Navbar = () => {
               />
             )}
           </button>
-          {/* <button
-                type="button"
-                className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                theme
-              </button>  */}
+          <Switch
+            checked={theme === "light"}
+            onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+            className="ml-4"
+            icon={
+              <FontAwesomeIcon
+                icon={faMoon}
+                className={`${
+                  theme === "light" ? "text-light-primary" : "text-dark-primary"
+                } text-2xl bg-white rounded-full`}
+              />
+            }
+            checkedIcon={
+              <FontAwesomeIcon
+                icon={faSun}
+                className={`${
+                  theme === "light" ? "text-light-primary" : "text-dark-primary"
+                } text-2xl bg-white rounded-full`}
+              />
+            }
+            classes={{
+              switchBase: "!text-white",
+              checked: "!text-white",
+              track: "!bg-white !opacity-100",
+            }}
+          />
         </div>
       </div>
       <Drawer
@@ -102,6 +127,38 @@ const Navbar = () => {
                 />
               )}
             </button>
+            <div className="flex flex-row gap-x-5 mt-3 items-center">
+              <h1 className="text-white text-xl">Theme:</h1>
+              <Switch
+                checked={theme === "light"}
+                onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+                icon={
+                  <FontAwesomeIcon
+                    icon={faMoon}
+                    className={`${
+                      theme === "light"
+                        ? "text-light-primary"
+                        : "text-dark-primary"
+                    } text-2xl bg-white rounded-full`}
+                  />
+                }
+                checkedIcon={
+                  <FontAwesomeIcon
+                    icon={faSun}
+                    className={`${
+                      theme === "light"
+                        ? "text-light-primary"
+                        : "text-dark-primary"
+                    } text-2xl bg-white rounded-full`}
+                  />
+                }
+                classes={{
+                  switchBase: "!text-white",
+                  checked: "!text-white",
+                  track: "!bg-white !opacity-100",
+                }}
+              />
+            </div>
           </div>
         </div>
       </Drawer>
