@@ -1,7 +1,9 @@
-import { defineConfig } from 'vite'
+import { defineConfig, PluginOption } from 'vite'
 import react from '@vitejs/plugin-react'
+import mui from "vite-plugin-material-ui"
 
-// https://vitejs.dev/config/
+const muiPlugin = mui as PluginOption
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), muiPlugin],
 })

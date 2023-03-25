@@ -26,6 +26,8 @@ const reducer = (
         } else {
           return {
             ...state,
+            text: null,
+            hasDuplicates: false,
             status: 400,
             error: "No text was submitted",
           };
@@ -34,6 +36,8 @@ const reducer = (
         let err = error as Error;
         return {
           ...state,
+          text: null,
+          hasDuplicates: false,
           status: 500,
           error: err.message,
         };

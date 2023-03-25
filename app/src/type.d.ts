@@ -17,6 +17,27 @@ interface ThemeContextType {
   setTheme: (theme: ThemeType) => void;
 }
 
+interface LanguageContextType {
+  lang: Language;
+  setLang: (theme: Language) => void;
+}
+
+interface LangOptionsType {
+  label: string;
+  value: Language;
+}
+
+interface SnackbarInfoType {
+  open: boolean;
+  message: string;
+  severity: "success" | "info" | "warning" | "error";
+}
+
+interface SnackbarContextType {
+  snackbarInfo: SnackbarInfoType;
+  setSnackbarInfo: (snackbarInfo: SnackbarInfoType) => void;
+}
+
 interface dropZoneProp {
   setFiles: (files: File[]) => void;
 }

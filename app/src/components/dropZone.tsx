@@ -3,7 +3,6 @@ import { useDropzone } from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp, faFile } from "@fortawesome/free-solid-svg-icons";
 import FileInfo from "./fileInfo";
-import { dropZoneProp } from "../ts/interfaces/file";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function DropZone({ setFiles }: dropZoneProp) {
