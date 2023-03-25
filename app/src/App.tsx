@@ -1,5 +1,5 @@
 import Router from "./Routes";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import ThemeContextProvider from "./contexts/ThemeContext";
 import ReduxStoreProvider from "./contexts/ReduxStoreProvider";
 import LangContextProvider from "./contexts/LanguageContext";
@@ -12,9 +12,9 @@ const App = () => {
         <ReduxStoreProvider>
           <LangContextProvider>
             <SnackbarContextProvider>
-              <BrowserRouter>
+              <HashRouter>
                 <Router />
-              </BrowserRouter>
+              </HashRouter>
             </SnackbarContextProvider>
           </LangContextProvider>
         </ReduxStoreProvider>
