@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Box, Tab } from "@mui/material";
+import { Box, Tab, Alert } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -24,6 +24,9 @@ const Editor = () => {
     if (!textState.text || textState.status !== 200) {
       navigate("/");
     }
+    if (textState.status === 200 && !textState.hasDuplicates) {
+      setTab("2");
+    }
   }, [textState]);
 
   return (
@@ -38,6 +41,11 @@ const Editor = () => {
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
         Back to home
       </button>
+      {textState.status === 200 && !textState.hasDuplicates && (
+        <Alert severity="success" className="mt-4" sx={{fontSize: "18px"}}>
+          No duplicates in the text!
+        </Alert>
+      )}
       <TabContext value={tab}>
         <Box sx={{ borderBottom: 1, borderColor: "divider", pt: 1 }}>
           <TabList
