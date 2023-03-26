@@ -73,40 +73,31 @@ const Navbar = () => {
               />
             )}
           </button>
-          <Switch
-            checked={theme === "light"}
-            onChange={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="ml-4"
-            icon={
-              <FontAwesomeIcon
-                icon={faMoon}
-                className={`${
-                  theme === "light"
-                    ? "text-light-primary bg-light-text"
-                    : "text-dark-primary bg-dark-text"
-                } text-2xl rounded-full`}
-              />
-            }
-            checkedIcon={
-              <FontAwesomeIcon
-                icon={faSun}
-                className={`${
-                  theme === "light"
-                    ? "text-light-primary bg-light-text"
-                    : "text-dark-primary bg-dark-text"
-                } text-2xl rounded-full`}
-              />
-            }
-            classes={{
-              switchBase:
-                theme === "light" ? "!text-light-text" : "!text-dark-text",
-              checked:
-                theme === "light" ? "!text-light-text" : "!text-dark-text",
-              track:
-                (theme === "light" ? "!bg-light-text" : "!bg-dark-text") +
-                " !opacity-100",
-            }}
-          />
+          <div className="flex flex-row items-center ml-16">
+            <FontAwesomeIcon
+              icon={faMoon}
+              className={`${
+                theme === "light" ? "text-light-text" : "text-dark-text"
+              } text-2xl`}
+            />
+            <Switch
+              checked={theme === "light"}
+              onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+              classes={{
+                switchBase:
+                  theme === "light" ? "!text-light-text" : "!text-dark-text",
+                checked:
+                  theme === "light" ? "!text-light-text" : "!text-dark-text",
+                track: theme === "light" ? "!bg-light-text" : "!bg-dark-text",
+              }}
+            />
+            <FontAwesomeIcon
+              icon={faSun}
+              className={`${
+                theme === "light" ? "text-light-text" : "text-dark-text"
+              } text-2xl rounded-full`}
+            />
+          </div>
         </div>
       </div>
       <Drawer
@@ -149,7 +140,7 @@ const Navbar = () => {
             <h1
               className={`${
                 theme === "light" ? "text-light-text" : "text-dark-text"
-              } text-xl mb-3`}
+              } text-2xl mb-3 font-bold`}
             >
               Settings
             </h1>
@@ -178,7 +169,7 @@ const Navbar = () => {
                 />
               )}
             </button>
-            <div className="flex flex-row gap-x-5 mt-3 items-center">
+            <div className="flex flex-row justify-between mt-3 items-center">
               <h1
                 className={`${
                   theme === "light" ? "text-light-text" : "text-dark-text"
@@ -186,39 +177,38 @@ const Navbar = () => {
               >
                 Theme:
               </h1>
-              <Switch
-                checked={theme === "light"}
-                onChange={() => setTheme(theme === "light" ? "dark" : "light")}
-                icon={
-                  <FontAwesomeIcon
-                    icon={faMoon}
-                    className={`${
+              <div className="flex flex-row items-center ml-16 space-x-3 mr-2">
+                <FontAwesomeIcon
+                  icon={faMoon}
+                  className={`${
+                    theme === "light" ? "text-light-text" : "text-dark-text"
+                  } text-2xl`}
+                />
+                <Switch
+                  checked={theme === "light"}
+                  onChange={() =>
+                    setTheme(theme === "light" ? "dark" : "light")
+                  }
+                  classes={{
+                    switchBase:
                       theme === "light"
-                        ? "text-light-primary bg-light-text"
-                        : "text-dark-primary bg-dark-text"
-                    } text-2xl rounded-full`}
-                  />
-                }
-                checkedIcon={
-                  <FontAwesomeIcon
-                    icon={faSun}
-                    className={`${
+                        ? "!text-light-text"
+                        : "!text-dark-text",
+                    checked:
                       theme === "light"
-                        ? "text-light-primary bg-light-text"
-                        : "text-dark-primary bg-dark-text"
-                    } text-2xl rounded-full`}
-                  />
-                }
-                classes={{
-                  switchBase:
-                    theme === "light" ? "!text-light-text" : "!text-dark-text",
-                  checked:
-                    theme === "light" ? "!text-light-text" : "!text-dark-text",
-                  track:
-                    (theme === "light" ? "!bg-light-text" : "!bg-dark-text") +
-                    " !opacity-100",
-                }}
-              />
+                        ? "!text-light-text"
+                        : "!text-dark-text",
+                    track:
+                      theme === "light" ? "!bg-light-text" : "!bg-dark-text",
+                  }}
+                />
+                <FontAwesomeIcon
+                  icon={faSun}
+                  className={`${
+                    theme === "light" ? "text-light-text" : "text-dark-text"
+                  } text-2xl rounded-full`}
+                />
+              </div>
             </div>
           </div>
         </div>

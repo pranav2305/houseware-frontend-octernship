@@ -45,11 +45,13 @@ const EditorTab = () => {
           <FontAwesomeIcon
             icon={faTrash}
             className={
-              indexes.length > 0
-                ? theme === "light"
+              theme === "light"
+                ? !!indexes.length
                   ? "text-light-primary transform hover:scale-110"
-                  : "text-dark-primary transform hover:scale-110"
-                : "text-gray-400"
+                  : "text-gray-400"
+                : !!indexes.length
+                ? "text-dark-primary transform hover:scale-110"
+                : "text-dark-text"
             }
           />
         </button>
@@ -61,11 +63,13 @@ const EditorTab = () => {
           <FontAwesomeIcon
             icon={faUndo}
             className={
-              !!textState.undoStack?.length
-                ? theme === "light"
+              theme === "light"
+                ? !!textState.undoStack?.length
                   ? "text-light-primary transform hover:scale-110"
-                  : "text-dark-primary transform hover:scale-110"
-                : "text-gray-400"
+                  : "text-gray-400"
+                : !!textState.undoStack?.length
+                ? "text-dark-primary transform hover:scale-110"
+                : "text-dark-text"
             }
           />
         </button>
@@ -77,11 +81,13 @@ const EditorTab = () => {
           <FontAwesomeIcon
             icon={faRedo}
             className={
-              !!textState.redoStack?.length
-                ? theme === "light"
+              theme === "light"
+                ? !!textState.redoStack?.length
                   ? "text-light-primary transform hover:scale-110"
-                  : "text-dark-primary transform hover:scale-110"
-                : "text-gray-400"
+                  : "text-gray-400"
+                : !!textState.redoStack?.length
+                ? "text-dark-primary transform hover:scale-110"
+                : "text-dark-text"
             }
           />
         </button>
