@@ -29,3 +29,23 @@ export const reset = () => {
 
     return action;
 }
+
+export const undo = () => {
+    const action: TextAction = {
+        type: actionTypes.UNDO,
+        text: null,
+        indexes: null
+    };
+
+    return action;
+}
+
+export const redo = () => {
+    const action: TextAction = {
+        type: actionTypes.REDO,
+        text: null,
+        indexes: null
+    };
+
+    return action;
+}
