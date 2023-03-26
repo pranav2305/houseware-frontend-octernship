@@ -58,7 +58,13 @@ const CharacCard = ({ charac, index, indexes, setIndexes }: characCardProp) => {
           theme === "light" ? "border-light-primary" : "border-dark-primary"
         } w-9/12 border-[1.5px] mb-1`}
       />
-      <p className="text-2xl">{charac}</p>
+      <p
+        className={`text-2xl ${
+          theme === "light" ? "text-light-primary" : "text-dark-primary"
+        }`}
+      >
+        {charac}
+      </p>
     </div>
   );
 };

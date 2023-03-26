@@ -1,100 +1,218 @@
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLanguage } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faCircleXmark,
+  faSun,
+  faMoon,
+} from "@fortawesome/free-solid-svg-icons";
 import { LangContext } from "../contexts/LanguageContext";
 import { SUPPORTED_LANGS } from "../config";
 import { useLocation } from "react-router-dom";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import logo from "../assets/logo.png";
+import { Drawer, Switch } from "@mui/material";
 
 const Navbar = () => {
   const location = useLocation();
-  const { theme } = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
   const { lang, setLang } = useContext(LangContext);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <nav
       className={`${
         theme === "light" ? "bg-light-primary" : "bg-dark-primary"
-      } fixed w-full`}
+      } fixed w-full z-50`}
     >
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-24 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="block h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-              <svg
-                className="hidden h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex flex-shrink-0 items-center">
-              <div className="flex flex-row">
-                <img className="h-24 w-auto" src={logo} alt="HousewareHQ" />
-                <h1 className="text-3xl md:text-5xl text-white flex items-center">
-                  HousewareHQ
-                </h1>
-              </div>
-            </div>
-          </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button type="button" className="text-white hover:text-gray-300">
-              {location.pathname === "/" && <Dropdown
+      <div className="flex h-24 items-center justify-between px-6 sm:px-8 lg:px-12">
+        <button
+          type="button"
+          className="transition hover:scale-125 sm:hidden"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <FontAwesomeIcon
+            icon={faBars}
+            className={`${
+              theme === "light" ? "text-light-text" : "text-dark-text"
+            } text-2xl`}
+          />
+        </button>
+        <div className="flex flex-row">
+          <img className="h-24 w-auto" src={logo} alt="HousewareHQ" />
+          <h1
+            className={`text-3xl md:text-5xl ${
+              theme === "light" ? "text-light-text" : "text-dark-text"
+            } flex items-center`}
+          >
+            HousewareHQ
+          </h1>
+        </div>
+        <div className="sm:hidden"></div>
+        <div className="hidden absolute inset-y-0 right-0 sm:flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <button
+            type="button"
+            className={`${
+              theme === "light" ? "text-light-text" : "text-dark-text"
+            }`}
+          >
+            {location.pathname === "/" && (
+              <Dropdown
                 options={SUPPORTED_LANGS}
                 onChange={(opt) => setLang(opt.value)}
                 value={lang}
                 placeholder="Select an option"
-              />}
-              {/* <FontAwesomeIcon icon={faLanguage} /> */}
-            </button>
-            {/* <button
-                type="button"
-                className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                theme
-              </button>  */}
+                controlClassName={`${
+                  theme === "light"
+                    ? "bg-light-text text-light-primary"
+                    : "bg-dark-text text-dark-primary"
+                } rounded-md hover:cursor-pointer font-bold border-0`}
+                menuClassName={`rounded-md border-0 font-bold`}
+              />
+            )}
+          </button>
+          <div className="flex flex-row items-center ml-16">
+            <FontAwesomeIcon
+              icon={faMoon}
+              className={`${
+                theme === "light" ? "text-light-text" : "text-dark-text"
+              } text-2xl`}
+            />
+            <Switch
+              checked={theme === "light"}
+              onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+              classes={{
+                switchBase:
+                  theme === "light" ? "!text-light-text" : "!text-dark-text",
+                checked:
+                  theme === "light" ? "!text-light-text" : "!text-dark-text",
+                track: theme === "light" ? "!bg-light-text" : "!bg-dark-text",
+              }}
+            />
+            <FontAwesomeIcon
+              icon={faSun}
+              className={`${
+                theme === "light" ? "text-light-text" : "text-dark-text"
+              } text-2xl rounded-full`}
+            />
           </div>
         </div>
       </div>
-
-      <div className="sm:hidden" id="mobile-menu">
-        <div className="space-y-1 px-2 pt-2 pb-3">
-          {/* Add theme and lang buttons */}
+      <Drawer
+        anchor="left"
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        className="sm:hidden"
+      >
+        <div
+          className={`flex flex-col h-screen ${
+            theme === "light" ? "bg-light-primary" : "bg-dark-primary"
+          }`}
+        >
+          <div className="flex flex-row items-center justify-between h-20 px-6 gap-x-5">
+            <div className="flex flex-row">
+              <img className="h-16 w-auto" src={logo} alt="HousewareHQ" />
+              <h1
+                className={`text-2xl ${
+                  theme === "light" ? "text-light-text" : "text-dark-text"
+                } flex items-center`}
+              >
+                HousewareHQ
+              </h1>
+            </div>
+            <button
+              type="button"
+              className="transition hover:scale-125"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <FontAwesomeIcon
+                icon={faCircleXmark}
+                className={`${
+                  theme === "light" ? "text-light-text" : "text-dark-text"
+                } sm:hidden text-2xl`}
+              />
+            </button>
+          </div>
+          <hr className="border-gray-300 w-10/12 ml-auto mr-auto border-[1.5px]" />
+          <div className="flex flex-col m-6">
+            <h1
+              className={`${
+                theme === "light" ? "text-light-text" : "text-dark-text"
+              } text-2xl mb-3 font-bold`}
+            >
+              Settings
+            </h1>
+            <button
+              type="button"
+              className={`${
+                theme === "light" ? "text-light-text" : "text-dark-text"
+              } hover:text-gray-300`}
+            >
+              {location.pathname === "/" && (
+                <Dropdown
+                  options={SUPPORTED_LANGS}
+                  onChange={(opt) => setLang(opt.value)}
+                  value={lang}
+                  placeholder="Select an option"
+                  controlClassName={`${
+                    theme === "light"
+                      ? "bg-light-background"
+                      : "bg-dark-background"
+                  } rounded-md hover-cursor-pointer`}
+                  menuClassName={`${
+                    theme === "light"
+                      ? "bg-light-background"
+                      : "bg-dark-background"
+                  } rounded-md`}
+                />
+              )}
+            </button>
+            <div className="flex flex-row justify-between mt-3 items-center">
+              <h1
+                className={`${
+                  theme === "light" ? "text-light-text" : "text-dark-text"
+                } text-xl`}
+              >
+                Theme:
+              </h1>
+              <div className="flex flex-row items-center ml-16 space-x-3 mr-2">
+                <FontAwesomeIcon
+                  icon={faMoon}
+                  className={`${
+                    theme === "light" ? "text-light-text" : "text-dark-text"
+                  } text-2xl`}
+                />
+                <Switch
+                  checked={theme === "light"}
+                  onChange={() =>
+                    setTheme(theme === "light" ? "dark" : "light")
+                  }
+                  classes={{
+                    switchBase:
+                      theme === "light"
+                        ? "!text-light-text"
+                        : "!text-dark-text",
+                    checked:
+                      theme === "light"
+                        ? "!text-light-text"
+                        : "!text-dark-text",
+                    track:
+                      theme === "light" ? "!bg-light-text" : "!bg-dark-text",
+                  }}
+                />
+                <FontAwesomeIcon
+                  icon={faSun}
+                  className={`${
+                    theme === "light" ? "text-light-text" : "text-dark-text"
+                  } text-2xl rounded-full`}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </Drawer>
     </nav>
   );
 };

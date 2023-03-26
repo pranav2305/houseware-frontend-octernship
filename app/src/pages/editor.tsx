@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Box, Tab } from "@mui/material";
+import { Box, Tab, Alert } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -21,8 +21,11 @@ const Editor = () => {
   const [tab, setTab] = useState<string>("1");
 
   useEffect(() => {
-    if (!textState.text || textState.status !== 200) {
+    if (!textState.text) {
       navigate("/");
+    }
+    if (textState.status === 200 && !textState.hasDuplicates) {
+      setTab("2");
     }
   }, [textState]);
 
@@ -31,15 +34,20 @@ const Editor = () => {
       <button
         type="button"
         className={`${
-          theme === "light" ? "bg-light-primary" : "bg-dark-primary"
-        } p-3 pl-5 pr-5 h-12 mt-8 rounded-lg text-white text-xl font-bold flex flex-row gap-x-3 items-center`}
+          theme === "light" ? "bg-light-primary text-light-text" : "bg-dark-primary text-dark-text"
+        } p-3 pl-5 pr-5 h-12 mt-8 rounded-lg text-xl font-bold flex flex-row gap-x-3 items-center`}
         onClick={() => dispatch(reset())}
       >
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
         Back to home
       </button>
+      {textState.status === 200 && !textState.hasDuplicates && (
+        <Alert severity="success" className="mt-4" sx={{fontSize: "18px"}}>
+          No duplicates in the text!
+        </Alert>
+      )}
       <TabContext value={tab}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider", pt: 1 }}>
+        <Box sx={{ borderBottom: 1, borderColor: theme === "light" ? "lightgrey" : "#092C45", pt: 1 }}>
           <TabList
             onChange={(e, newTab) => setTab(newTab)}
             TabIndicatorProps={{
@@ -53,12 +61,14 @@ const Editor = () => {
               value="1"
               label="Editor"
               iconPosition="start"
+              classes={{ selected: theme === "light" ? "!text-light-primary" : "!text-dark-primary", root: "!font-semibold" }}
             />
             <Tab
               icon={<VisibilityIcon />}
               value="2"
               label="Preview"
               iconPosition="start"
+              classes={{ selected: theme === "light" ? "!text-light-primary" : "!text-dark-primary", root: "!font-semibold" }}
             />
           </TabList>
         </Box>

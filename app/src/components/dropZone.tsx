@@ -31,7 +31,9 @@ export default function DropZone({ setFiles }: dropZoneProp) {
     <div className="mb-6 w-full" id="dropzone">
       <div
         {...getRootProps({
-          className: `flex-col gap-y-5 dropzone w-full bg-white flex justify-center items-center py-12 rounded-xl ${
+          className: `flex-col gap-y-5 dropzone w-full ${
+            theme === "light" ? "bg-light-text" : "bg-dark-text"
+          } flex justify-center items-center py-12 rounded-xl ${
             theme === "light" ? "border-light-primary" : "border-dark-primary"
           } border-2 cursor-pointer mb-4 border-dashed`,
         })}
@@ -46,7 +48,7 @@ export default function DropZone({ setFiles }: dropZoneProp) {
         <p
           className={`${
             theme === "light" ? "text-light-primary" : "text-dark-primary"
-          } ml-4 text-sm sm:text-base`}
+          } ml-4 text-sm sm:text-base font-semibold`}
         >
           Drag and drop a file here, or click to select a file
         </p>

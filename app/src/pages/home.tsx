@@ -36,13 +36,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (textState.error) {
-      setSnackbarInfo({
-        open: true,
-        message: textState.error,
-        severity: "error",
-      });
-    } else if (textState.status === 200) {
+    if (textState.status === 200) {
       setSnackbarInfo({
         open: true,
         message: "Text submitted successfully",
@@ -67,8 +61,8 @@ const Home = () => {
           <textarea
             {...props}
             className={`${
-              theme === "light" ? "border-light-primary" : "border-dark-primary"
-            } w-full h-48 mt-16 p-4 rounded-lg bg-white border-2 resize-none focus:outline-none focus:border-[3px]`}
+              theme === "light" ? "border-light-primary bg-light-text text-light-primary" : "border-dark-primary bg-dark-text text-dark-primary"
+            } w-full h-48 mt-16 p-4 rounded-lg border-2 resize-none focus:outline-none focus:border-[3px] font-semibold`}
             placeholder="Enter text to remove duplicate characters..."
           ></textarea>
         )}
@@ -91,8 +85,8 @@ const Home = () => {
       </div>
       <button
         className={`${
-          theme === "light" ? "bg-light-primary" : "bg-dark-primary"
-        } p-3 pl-5 pr-5 h-12 mt-8 rounded-lg text-white text-xl font-bold`}
+          theme === "light" ? "bg-light-primary text-light-text" : "bg-dark-primary text-dark-text"
+        } p-3 pl-5 pr-5 h-12 mt-8 rounded-lg text-xl font-bold`}
         onClick={onSubmit}
       >
         Submit

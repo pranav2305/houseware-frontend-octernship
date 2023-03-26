@@ -1,3 +1,37 @@
+# Submission Details
+
+A Duplicate Character Remover
+
+## Technologies Used
+- React
+- Vite
+- Typescript
+- Redux
+- Tailwind CSS
+- React Transliterate
+- Material UI
+
+## Addiotional Features
+- Users can upload a text file instead of typing out the entire text.
+- Users can type the text in 30 languages, keeping in mind Houseware's vision to allow users to use the data warehouse in the language they speak
+- Users can select multiple characters at once to remove duplicates.
+- Users can undo/redo their action to prevent accidental data losses.
+- Users can also change the theme depending on their preference.
+- Admins can change the config of the app easily by changing variables like `CASE_SENSITIVE`, `DUPLICATE_WHITESPACES_ALLOWED`, etc in `config.ts`
+
+## Setup
+1. Switch to app working diectory <br>
+`cd app`
+2. Install all dependencies <br>
+`yarn install` | `npm install`
+3. Build static website <br>
+`yarn build` | `npm build`
+4. View production preview <br>
+`yarn preview`
+5. Click [here](http://localhost:4173/houseware-frontend-octernship/) to view the website
+
+# Task Details
+
 ## Houseware
 
 ### Company information 

@@ -1,9 +1,9 @@
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faUndo, faRedo } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { removeDuplicates } from "../store/actionCreators";
+import { removeDuplicates, undo, redo } from "../store/actionCreators";
 import { DUPLICATE_WHITESPACES_ALLOWED } from "../config";
 import CharacCard from "./characCard";
 
@@ -19,17 +19,75 @@ const EditorTab = () => {
     setIndexes([]);
   };
 
+  const onUndo = () => {
+    dispatch(undo());
+  };
+
+  const onRedo = () => {
+    dispatch(redo());
+  };
+
   return (
     <>
       <div className="flex flex-row text-xl gap-x-3">
-        <p>{indexes.length} Selected</p>
-        <button type="button" onClick={onDelete}>
+        <p
+          className={`${
+            theme === "light" ? "text-light-primary" : "text-dark-primary"
+          }`}
+        >
+          {indexes.length} Selected
+        </p>
+        <button
+          type="button"
+          onClick={onDelete}
+          disabled={indexes.length === 0}
+        >
           <FontAwesomeIcon
             icon={faTrash}
             className={
               theme === "light"
-                ? "text-light-primary hover:text-light-secondary"
-                : "text-dark-primary hover:text-dark-secondary"
+                ? !!indexes.length
+                  ? "text-light-primary transform hover:scale-110"
+                  : "text-gray-400"
+                : !!indexes.length
+                ? "text-dark-primary transform hover:scale-110"
+                : "text-dark-text"
+            }
+          />
+        </button>
+        <button
+          type="button"
+          onClick={onUndo}
+          disabled={textState.undoStack?.length === 0 ?? true}
+        >
+          <FontAwesomeIcon
+            icon={faUndo}
+            className={
+              theme === "light"
+                ? !!textState.undoStack?.length
+                  ? "text-light-primary transform hover:scale-110"
+                  : "text-gray-400"
+                : !!textState.undoStack?.length
+                ? "text-dark-primary transform hover:scale-110"
+                : "text-dark-text"
+            }
+          />
+        </button>
+        <button
+          type="button"
+          onClick={onRedo}
+          disabled={textState.redoStack?.length === 0 ?? true}
+        >
+          <FontAwesomeIcon
+            icon={faRedo}
+            className={
+              theme === "light"
+                ? !!textState.redoStack?.length
+                  ? "text-light-primary transform hover:scale-110"
+                  : "text-gray-400"
+                : !!textState.redoStack?.length
+                ? "text-dark-primary transform hover:scale-110"
+                : "text-dark-text"
             }
           />
         </button>

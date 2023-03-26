@@ -55,6 +55,8 @@ interface TextState {
   hasDuplicates: boolean;
   status: 200 | 400 | 500 | null;
   error: string | null;
+  undoStack: string[] | null;
+  redoStack: string[] | null;
 }
 
 interface TextAction  {
