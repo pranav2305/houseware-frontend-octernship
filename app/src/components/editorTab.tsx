@@ -22,14 +22,14 @@ const EditorTab = () => {
   return (
     <>
       <div className="flex flex-row text-xl gap-x-3">
-        <p>{indexes.length} Selected</p>
+        <p className={`${theme === "light" ? "text-light-primary" : "text-dark-primary"}`}>{indexes.length} Selected</p>
         <button type="button" onClick={onDelete}>
           <FontAwesomeIcon
             icon={faTrash}
             className={
               theme === "light"
-                ? "text-light-primary hover:text-light-secondary"
-                : "text-dark-primary hover:text-dark-secondary"
+                ? "text-light-primary transform hover:scale-110"
+                : "text-dark-primary transform hover:scale-110"
             }
           />
         </button>

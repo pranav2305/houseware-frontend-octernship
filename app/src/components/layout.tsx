@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { SnackbarContext } from "../contexts/SnackbarContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Navbar from "./navbar";
@@ -9,6 +10,17 @@ import Navbar from "./navbar";
 const Layout = () => {
   const { theme } = useContext(ThemeContext);
   const { snackbarInfo, setSnackbarInfo } = useContext(SnackbarContext);
+  const textState = useSelector((state: TextState) => state);
+
+  useEffect(() => {
+    if (textState.error) {
+      setSnackbarInfo({
+        open: true,
+        message: textState.error,
+        severity: "error",
+      });
+    } 
+  }, [textState]);
 
   const handleClose = () => {
     setSnackbarInfo({...snackbarInfo, open: false});

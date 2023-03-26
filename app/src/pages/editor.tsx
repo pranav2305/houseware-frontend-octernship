@@ -21,7 +21,7 @@ const Editor = () => {
   const [tab, setTab] = useState<string>("1");
 
   useEffect(() => {
-    if (!textState.text || textState.status !== 200) {
+    if (!textState.text) {
       navigate("/");
     }
     if (textState.status === 200 && !textState.hasDuplicates) {
@@ -34,8 +34,8 @@ const Editor = () => {
       <button
         type="button"
         className={`${
-          theme === "light" ? "bg-light-primary" : "bg-dark-primary"
-        } p-3 pl-5 pr-5 h-12 mt-8 rounded-lg text-white text-xl font-bold flex flex-row gap-x-3 items-center`}
+          theme === "light" ? "bg-light-primary text-light-text" : "bg-dark-primary text-dark-text"
+        } p-3 pl-5 pr-5 h-12 mt-8 rounded-lg text-xl font-bold flex flex-row gap-x-3 items-center`}
         onClick={() => dispatch(reset())}
       >
         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
@@ -47,7 +47,7 @@ const Editor = () => {
         </Alert>
       )}
       <TabContext value={tab}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider", pt: 1 }}>
+        <Box sx={{ borderBottom: 1, borderColor: theme === "light" ? "lightgrey" : "#092C45", pt: 1 }}>
           <TabList
             onChange={(e, newTab) => setTab(newTab)}
             TabIndicatorProps={{
@@ -61,12 +61,14 @@ const Editor = () => {
               value="1"
               label="Editor"
               iconPosition="start"
+              classes={{ selected: theme === "light" ? "!text-light-primary" : "!text-dark-primary", root: "!font-semibold" }}
             />
             <Tab
               icon={<VisibilityIcon />}
               value="2"
               label="Preview"
               iconPosition="start"
+              classes={{ selected: theme === "light" ? "!text-light-primary" : "!text-dark-primary", root: "!font-semibold" }}
             />
           </TabList>
         </Box>
