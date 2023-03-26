@@ -11,7 +11,7 @@ A Duplicate Character Remover
 - React Transliterate
 - Material UI
 
-## Addiotional Features
+## Additional Features
 - Users can upload a text file instead of typing out the entire text.
 - Users can type the text in 30 languages, keeping in mind Houseware's vision to allow users to use the data warehouse in the language they speak
 - Users can select multiple characters at once to remove duplicates.
